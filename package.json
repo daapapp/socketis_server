@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "npm-run-all clean transpile",
-    "start": "node src/bin/www.js",
+    "start": "nodemon --exec babel-node --legacy-watch src/bin/www.js",
     "server": "babel-node src/bin/www.js",
     "server:prod": "node ./dist/bin/www",
     "dev": "NODE_ENV=development npm-run-all server",
