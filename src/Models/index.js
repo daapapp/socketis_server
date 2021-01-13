@@ -4,10 +4,10 @@
 
 // MessageModel.belongsTo(UserModel);
 // MessageModel.belongsTo(GroupModel);
-import {GroupModel} from "./Group";
-import {MessageModel} from "./Message";
-import {UserModel} from "./User";
-import {PermissionModel} from './Permission';
+import {GroupModel} from "./Group.js";
+import {MessageModel} from "./Message.js";
+import {UserModel} from "./User.js";
+import {PermissionModel} from './Permission.js';
 
 UserModel.hasMany(GroupModel);
 GroupModel.belongsTo(UserModel)

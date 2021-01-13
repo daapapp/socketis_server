@@ -1,6 +1,5 @@
-import {Cookie} from "../utils/cookie";
-
-const jwt = require('jsonwebtoken');
+import {Cookie} from "../utils/cookie.js";
+import jwt  from 'jsonwebtoken'
 //import jwt from 'jsonwebtoken';
 
 export class JWT {

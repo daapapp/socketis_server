@@ -1,22 +1,22 @@
 import helmet from "helmet";
-import {JWT} from "./Config/jwt";
-var fs = require('fs');
-var session = require('express-session')
-var path = require('path');
-const cors = require('cors');
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import {JWT} from "./Config/jwt.js";
 
-var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
-var dbRouter = require('./routes/db');
+import session from 'express-session'
+import path from 'path'
+import cors from 'cors'
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+
+import indexRouter from './routes/index.js'
+import authRouter from './routes/auth.js'
+import dbRouter from './routes/db.js'
 // set ssl
-var options = {
+const options = {
   // key: fs.readFileSync('./openssl_keys/server_key.pem'),
   // cert: fs.readFileSync('./openssl_keys/server_cert.pem')
 };
-var app = express();
+const app = express();
 // app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
@@ -41,4 +41,4 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/db',JWT.verifyToken,dbRouter)
 // app.use('/db',dbRouter)
-module.exports = app;
+export default app

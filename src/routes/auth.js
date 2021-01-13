@@ -1,9 +1,8 @@
-import {sequelize} from "../Config/db";
-import {UserModel} from "../Models/User";
-import {JWT} from "../Config/jwt";
-
-var express = require('express');
-var router = express.Router();
+import {sequelize} from "../Config/db.js";
+import {UserModel} from "../Models/User.js";
+import {JWT} from "../Config/jwt.js";
+import express from  'express';
+const router = express.Router();
 
 router.get('/login',function (req,res,next){
   res.render('auth/login/index', { title: 'Login' });
@@ -31,5 +30,4 @@ router.post('/login', async function(req, res, next) {
       res.sendStatus(500)
     }
 });
-
-module.exports = router;
+export default router

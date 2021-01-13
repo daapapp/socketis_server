@@ -1,10 +1,8 @@
-import {GroupModel} from "./Group";
+import {GroupModel} from "./Group.js";
 
-const {DataTypes } = require('sequelize');
-
-import {sequelize} from "../Config/db";
-import {MessageModel} from "./Message";
-import {PermissionModel} from "./Permission";
+import {sequelize} from "../Config/db.js";
+import * as Sequelize from "sequelize";
+const {DataTypes} =Sequelize.DataTypes
 const UserModel = sequelize.define('User', {
   id:{
     type:DataTypes.INTEGER,

@@ -1,6 +1,6 @@
 import * as url from "url";
+import cookie from 'cookie'
 
-var cookie = require('cookie');
 
 export class Cookie {
   static setCookie(res,key,value){

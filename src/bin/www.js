@@ -1,27 +1,22 @@
-#!/usr/bin/env node
-
-
-import {log} from "../utils/log";
-
 /**
  * Module dependencies.
  */
-require('dotenv').config()
-var app = require('../app');
-var debug = require('debug')('socket:server');
-var http = require('http');
-var redisAdapter = require('socket.io-redis');
-var moment = require('moment');
-const Redis = require('ioredis');
-
-const onError = require('../utils/errorHandling').onError
-const normalizePort = require('../utils/errorHandling').normalizePort
-
+import dotenv from 'dotenv'
+import app from '../app.js';
+import debugModule from 'debug';
+import http from 'http';
+import redisAdapter from 'socket.io-redis';
+import moment from "moment";
+import Redis from 'ioredis';
+import {log} from "../utils/log.js";
+import {onError,normalizePort } from '../utils/errorHandling.js'
+const debug = debugModule('socket:server');
+dotenv.config()
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 
 //https://github.com/socketio/socket.io-redis#cluster-example
 const redisStartupNodes = [
@@ -190,7 +185,7 @@ io.on('connection', function(socket) {
 
 
   socket.on('allSocketsInRoom', async function(req,cb) {
-    log('allSocketsInRoom',req)
+    // log('allSocketsInRoom',req)
     // console.log('allSocketsInRoom::???: : ',typeof req,req,cb)
     const {roomId} = req
     let sockets= []
@@ -199,13 +194,13 @@ io.on('connection', function(socket) {
         new Error('roomId')
       }
       sockets = await io.of(nameSpace).adapter.sockets(new Set([roomId]));
-      log('allSocketsInRoom',sockets)
+      // log('allSocketsInRoom',sockets)
       // console.log('sockets:::',JSON.stringify(sockets))
       if(cb){
         cb(undefined,Array.from(sockets))
       }
     }catch (e) {
-      log('allSocketsInRoom',e)
+      // log('allSocketsInRoom',e)
       if(cb) {
         cb(e, [])
       }
@@ -220,12 +215,12 @@ io.on('connection', function(socket) {
     let rooms= new Set()
     try {
       rooms = await io.of(nameSpace).adapter.allRooms();
-      log('allRooms',Array.from(rooms))
+      // log('allRooms',Array.from(rooms))
       if(cb){
         cb(undefined,Array.from(rooms))
       }
     }catch (e) {
-      log('allRooms err',e)
+      // log('allRooms err',e)
       if(cb) {
         cb(e, [])
       }
@@ -238,14 +233,14 @@ io.on('connection', function(socket) {
     try {
        const sids = await io.of(nameSpace).adapter.sids;
       Array.from(sids).forEach(sid=>{
-          console.log('sid',sid)
+          // console.log('sid',sid)
          rooms.push(sid[0])
       })
       if(cb){
         cb(undefined,rooms)
       }
     }catch (e) {
-      log('allSockets err',e)
+      // log('allSockets err',e)
       if(cb) {
         cb(e, [])
       }
